@@ -58,3 +58,18 @@ sudo docker ps
 ## Open your web browser and head to : http://localhost:3000
 OpenWebUI should appear in your browser if everything worked.
 To use OpenWebUI, creating a user and logging in is required : https://github.com/open-webui/open-webui/discussions/491
+
+---
+
+## Running Jupyterlab server from docker container
+
+```bash
+PWD="$(pwd)" && sudo docker run --rm -p 8889:8888 --workdir /work --mount type=bind,source=$PWD,target=/work quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
+```
+
+where "my-token" is the name of the token used to access the server from the following URL :   
+http://localhost:8889/lab?token=my-token or simply http://localhost:8889
+
+The command will bind your current directory when running the docker command into the /work directory inside the container.   
+Meaning inside your container, your files will be in /work. You can change this behavior with the PWD variable (by default the current directory).  
+For example, **PWD="$(pwd)/source"** will put the work from the source subfolder into the Jupyter container

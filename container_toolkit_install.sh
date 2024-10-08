@@ -9,3 +9,4 @@ sudo apt-get update
 #install toolkit
 sudo apt-get install -y nvidia-container-toolkit
 
+echo "Finished nvidia container installation!"
