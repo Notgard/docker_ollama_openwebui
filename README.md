@@ -59,6 +59,14 @@ sudo docker ps
 OpenWebUI should appear in your browser if everything worked.
 To use OpenWebUI, creating a user and logging in is required : https://github.com/open-webui/open-webui/discussions/491
 
+## Force disable logging
+OpenWebUI can only disable logging into an account for fresh installs or by removing already existing users.  
+The easiest way for docker is to clean the docker emulation memory (volume) with the following command :
+
+```bash
+sudo docker rm --volumes open-webui # 'open-webui' being the name of the container
+```
+
 ---
 
 ## Running Jupyterlab server from docker container
