@@ -21,7 +21,7 @@ sudo ubuntu-drivers install
 ```
 
 # Need to reboot required to test proper driver installation (driver nvidia-550)
-## Warning ! The following command reboots your system, save any unsaved documents beforhand
+## Warning ! The following command reboots your system, save any unsaved documents beforehand
 ```bash
 sudo reboot
 ```
