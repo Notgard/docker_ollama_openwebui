@@ -23,7 +23,7 @@ sudo ubuntu-drivers install
 # Need to reboot required to test proper driver installation (driver nvidia-550)
 
 ### Note:
-System should boot properly an nvidia functions available
+System should boot properly and nvidia functions available
 
 ### Test
 If the driver installation worked, the following command should show GPU information
