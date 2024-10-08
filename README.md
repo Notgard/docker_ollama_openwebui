@@ -50,6 +50,10 @@ sudo docker ps
 sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
+### Note:
+The Nvidia GPU support for WebUI isn't necessary in most cases (confusing) :
+https://github.com/open-webui/open-webui/discussions/2167
+
 ## Check if container(s) is(are) running properly
 ```bash
 sudo docker ps
@@ -61,10 +65,15 @@ To use OpenWebUI, creating a user and logging in is required : https://github.co
 
 ## Force disable logging
 OpenWebUI can only disable logging into an account for fresh installs or by removing already existing users.  
-The easiest way for docker is to clean the docker emulation memory (volume) with the following command :
+The easiest way for docker is to clean the docker emulation memory (volume) if you already started one with the following command :
 
 ```bash
 sudo docker rm --volumes open-webui # 'open-webui' being the name of the container
+```
+
+Now you simply need to run the container with **WEBUI_AUTH** set to **False** again like the following :  
+```bash
+sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data -e WEBUI_AUTH=False --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
 ---
