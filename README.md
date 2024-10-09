@@ -80,7 +80,7 @@ sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-
 
 ## Running Jupyterlab server from docker container (With GPU acceleration but without CUDA compilation)
 
-The following command runs a simple Jupyterlab server with acess to the GPU from the inside. It does not include additional libraries for AI or packages for advanced GPU features with CUDA. For proper utilization of the GPU for AI workloads, consider reading the next part with **full GPU access**.
+The following command runs a simple Jupyterlab server with access to the GPU from the inside. It does not include additional libraries for AI or packages for advanced GPU features with CUDA. For proper utilization of the GPU for AI workloads, consider reading the next part with **full GPU access**.
 
 ```bash
 PWD="$(pwd)" && sudo docker run --rm --gpus all -p 8889:8888 --workdir /work --mount type=bind,source=$PWD,target=/work quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
