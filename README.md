@@ -97,7 +97,7 @@ The previous Jupyterlab instructions make GPU accelerated available as they have
   
 To circonmvent this, run the following command :  
 ```bash
-sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab/data:/home/jovyan/work -e GRANT_SUDO=yes -e JUPYTER_ENABLE_lAB=yes -e NB_UID="$(id -u)" -e NB_GID="$(id -g)" --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim
+PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab/data:/home/jovyan/work --workdir /work --mount type=bind,source=$PWD,target=/work -e GRANT_SUDO=yes -e JUPYTER_ENABLE_lAB=yes -e NB_UID="$(id -u)" -e NB_GID="$(id -g)" -e JUPYTER_TOKEN=PASSWORD --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim && sudo docker logs
 ```
 
-This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries.
+This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password.
