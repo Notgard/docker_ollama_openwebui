@@ -80,6 +80,8 @@ sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-
 
 ## Running Jupyterlab server from docker container (With GPU acceleration but without CUDA compilation)
 
+The following command runs a simple Jupyterlab server with acess to the GPU from the inside. It does not include additional libraries for AI or packages for advanced GPU features with CUDA. For proper utilization of the GPU for AI workloads, consider reading the next part with **full GPU access**.
+
 ```bash
 PWD="$(pwd)" && sudo docker run --rm --gpus all -p 8889:8888 --workdir /work --mount type=bind,source=$PWD,target=/work quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
 ```
@@ -97,7 +99,7 @@ The previous Jupyterlab instructions make GPU accelerated available as they have
   
 To circonmvent this, run the following command :  
 ```bash
-PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab/data:/home/jovyan/work --workdir /work --mount type=bind,source=$PWD,target=/work -e GRANT_SUDO=yes -e JUPYTER_ENABLE_lAB=yes -e NB_UID="$(id -u)" -e NB_GID="$(id -g)" -e JUPYTER_TOKEN=PASSWORD --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim && sudo docker logs
+PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab:/home/jovyan/work --workdir /work --mount type=bind,source=$PWD,target=/work -e JUPYTER_TOKEN=$PASSWORD -e NB_UID=$(id -u) -e NB_GID=$(id -g) --env-file ./env.list --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim && sudo docker logs gpu_jupyter_server
 ```
 
-This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password.
+This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password by modifying the PASSWORD variable.
