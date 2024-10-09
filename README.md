@@ -1,5 +1,10 @@
 # Docker + Ollama + OpenWebUI Installation instructions
 
+Clone this repository and go into it with the following command
+```bash
+git clone https://github.com/Notgard/docker_ollama_openwebui.git && cd docker_ollama_openwebui
+```
+
 ## Make sure install scripts can be executed
 ```bash
 chmod +x docker_install.sh && chmod +x container_toolkit_install.sh
