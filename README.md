@@ -102,4 +102,6 @@ To circonmvent this, run the following command :
 PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab:/home/jovyan/work --workdir /work --mount type=bind,source=$PWD,target=/work -e JUPYTER_TOKEN=$PASSWORD -e NB_UID=$(id -u) -e NB_GID=$(id -g) --env-file ./env.list --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim && sudo docker logs gpu_jupyter_server
 ```
 
-This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password by modifying the PASSWORD variable.
+This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password by modifying the PASSWORD variable.  
+After running the command, head to the following URL in your browser to access Jupyterlab :  
+http://localhost:8889
