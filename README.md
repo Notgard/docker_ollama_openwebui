@@ -32,7 +32,7 @@ sudo ubuntu-drivers install
 sudo reboot
 ```
 
-### Note:
+### Note
 System should boot properly and NVIDIA functions available
 
 ### Test
@@ -56,7 +56,7 @@ sudo docker ps
 sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
-### Note:
+### Note
 The Nvidia GPU support for WebUI isn't necessary in most cases (confusing) :
 https://github.com/open-webui/open-webui/discussions/2167
 
@@ -151,7 +151,7 @@ This will run all 3 interconnected services in the background, you can check tha
 Perplexica is now up and running and can be accessed through the following URL:  
 http://localhost:3000
 
-### Note :
+### Note
 After testing, it seems that models below 7B parameters will struggle greatly with generating any kind of response while citing sources.
 Furthermore, you can also use your own embedding models and the current chat LLM in the Perplexica parameter from its web UI. Embedding models are used by Perplexica to issue its search request when prompted by a user as quoted from the Perplexica repository :  
 
