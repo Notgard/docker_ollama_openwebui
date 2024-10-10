@@ -1,26 +1,27 @@
 # Docker + Ollama + OpenWebUI Installation instructions
+## Tools installations
 
 Clone this repository and go into it with the following command
 ```bash
 git clone https://github.com/Notgard/docker_ollama_openwebui.git && cd docker_ollama_openwebui
 ```
 
-## Make sure install scripts can be executed
+### Make sure install scripts can be executed
 ```bash
 chmod +x docker_install.sh && chmod +x container_toolkit_install.sh
 ```
 
-## Install docker
+### Install docker
 ```bash
 ./docker_install.sh
 ```
 
-## Install nvidia-drivers
+### Install nvidia-drivers
 ```bash
 sudo ubuntu-drivers install
 ```
 
-## Install nvidia-container-toolkit
+### Install nvidia-container-toolkit
 ```bash
 ./container_toolkit_install.sh
 ```
@@ -45,7 +46,7 @@ nvidia-smi
 sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
 
-## Check if container is running properly
+### Check if container is running properly
 ```bash
 sudo docker ps
 ```
@@ -59,7 +60,7 @@ sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-
 The Nvidia GPU support for WebUI isn't necessary in most cases (confusing) :
 https://github.com/open-webui/open-webui/discussions/2167
 
-## Check if container(s) is(are) running properly
+### Check if container(s) is(are) running properly
 ```bash
 sudo docker ps
 ```
@@ -68,7 +69,7 @@ sudo docker ps
 OpenWebUI should appear in your browser if everything worked.
 To use OpenWebUI, creating a user and logging in is required : https://github.com/open-webui/open-webui/discussions/491
 
-## Force disable logging
+## Force disable logging (OpenWebUI)
 OpenWebUI can only disable logging into an account for fresh installs or by removing already existing users.  
 The easiest way for docker is to clean the docker emulation memory (volume) **if you already started a container** with the following command :
 
