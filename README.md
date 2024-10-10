@@ -128,6 +128,10 @@ First, you have to clone the Perplexity GitHub repository:
 ```bash
 git clone https://github.com/ItzCrazyKns/Perplexica.git
 ```
+Move into the cloned repository:
+```bash
+cd Perplexica
+```
 Rename the configuration file:
 ```bash
 mv sample.config.toml config.toml
