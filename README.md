@@ -32,7 +32,7 @@ sudo reboot
 ```
 
 ### Note:
-System should boot properly and nvidia functions available
+System should boot properly and NVIDIA functions available
 
 ### Test
 If the driver installation worked, the following command should show GPU information
@@ -100,9 +100,9 @@ For example, **PWD="$(pwd)/source"** will put the work from the source subfolder
 
 ## Running JupyterLab server from docker container with full GPU access
 With the previous installations on your local machine, you should be able to access your GPU (nvidia-smi) directly and from your docker container.  
-The previous Jupyterlab instructions make GPU accelerated available as they have access to your GPU, but with some limitations. AI libraries like **pytorch** or others may not be able to fully utilize your GPU because it lacks compilation capibilities (**nvcc**).  
+The previous Jupyterlab instructions make GPU accelerated available as they have access to your GPU, but with some limitations. AI libraries like **pytorch** or others may not be able to fully utilize your GPU because it lacks compilation capabilities (**nvcc**).  
   
-To circonmvent this, run the following command :  
+To circumvention this, run the following command :  
 ```bash
 PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 8889:8888 -v jupyterlab:/home/jovyan/work --workdir /work --mount type=bind,source=$PWD,target=/work -e JUPYTER_TOKEN=$PASSWORD -e NB_UID=$(id -u) -e NB_GID=$(id -g) --env-file ./env.list --user root --name gpu_jupyter_server cschranz/gpu-jupyter:v1.7_cuda-12.2_ubuntu-22.04_slim && sudo docker logs gpu_jupyter_server
 ```
@@ -143,5 +143,8 @@ sudo docker compose up -d
 ```
 This will run all 3 interconnected services in the background, you can check that they are running properly with the **sudo docker ps** command.
 
-### Note:
-After testing, it seems that models below 7B parameters will strugle greatly with generating any kind of response while citing sources.
+### Note :
+After testing, it seems that models below 7B parameters will struggle greatly with generating any kind of response while citing sources.
+Furthermore, you can also use your own embedding models in the Perplexica parameter from its web UI. Embedding models are used by Perplexica to issue its search request when prompted by a user as quoted from the Perplexica repository :  
+
+> After the information is retrieved, it is based on keyword-based search. We then convert the information into embeddings and the query as well, then we perform a similarity search to find the most relevant sources to answer the query.
