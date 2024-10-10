@@ -159,6 +159,7 @@ Furthermore, you can also use your own embedding models and the current chat LLM
 
 > After the information is retrieved, it is based on keyword-based search. We then convert the information into embeddings and the query as well, then we perform a similarity search to find the most relevant sources to answer the query.
 
+In case the CPU is solicited instead of the GPU, restart Ollama (`sudo docker restart ollama` for Docker).
 ## Entering a docker container (Ollama)
 If you wish to enter inside a running docker container, which is especially useful in the case Ollama when you want to pull or list models.  
 This can be done with the following command :
