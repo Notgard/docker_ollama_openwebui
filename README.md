@@ -40,7 +40,7 @@ If the driver installation worked, the following command should show GPU informa
 nvidia-smi
 ```
 
-## Pull and run ollama with GPU acceleration
+## Pull and run Ollama with GPU acceleration
 ```bash
 sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
@@ -50,9 +50,9 @@ sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name olla
 sudo docker ps
 ```
 
-## Pull and run openwebui with Nvidia GPU support
+## Pull and run OpenWebUI with Nvidia GPU support
 ```bash
-sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
+sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
 ### Note:
@@ -64,7 +64,7 @@ https://github.com/open-webui/open-webui/discussions/2167
 sudo docker ps
 ```
 
-## Open your web browser and head to : http://localhost:3000
+### Open your web browser and head to : http://localhost:3030
 OpenWebUI should appear in your browser if everything worked.
 To use OpenWebUI, creating a user and logging in is required : https://github.com/open-webui/open-webui/discussions/491
 
@@ -78,7 +78,7 @@ sudo docker rm --volumes open-webui # 'open-webui' being the name of the contain
 
 Now you simply need to run the container with **WEBUI_AUTH** set to **False** again like the following :  
 ```bash
-sudo docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data -e WEBUI_AUTH=False --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
+sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data -e WEBUI_AUTH=False --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
 ---
@@ -147,8 +147,21 @@ sudo docker compose up -d
 ```
 This will run all 3 interconnected services in the background, you can check that they are running properly with the **sudo docker ps** command.
 
+Perplexica is now up and running and can be accessed through the following URL:  
+http://localhost:3000
+
 ### Note :
 After testing, it seems that models below 7B parameters will struggle greatly with generating any kind of response while citing sources.
-Furthermore, you can also use your own embedding models in the Perplexica parameter from its web UI. Embedding models are used by Perplexica to issue its search request when prompted by a user as quoted from the Perplexica repository :  
+Furthermore, you can also use your own embedding models and the current chat LLM in the Perplexica parameter from its web UI. Embedding models are used by Perplexica to issue its search request when prompted by a user as quoted from the Perplexica repository :  
+
+>The query returned by the first chain is passed to SearXNG to search the web for information.
 
 > After the information is retrieved, it is based on keyword-based search. We then convert the information into embeddings and the query as well, then we perform a similarity search to find the most relevant sources to answer the query.
+
+## Entering a docker container (Ollama)
+If you wish to enter inside a running docker container, which is especially useful in the case Ollama when you want to pull or list models.  
+This can be done with the following command :
+```bash
+sudo docker exec -it ollama bash
+```
+The general pattern for entering any other container that isn't named **"ollama"** is typically `docker exec -it <container_name> bash`. The name of a running container can be seen with the `sudo docker ps` command.
