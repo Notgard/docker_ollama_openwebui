@@ -137,7 +137,7 @@ Change the configuration in the config file to have the local Ollama URL:
 sed -i 's|^OLLAMA = .*|OLLAMA = "http://host.docker.internal:11434"|' config.toml
 ```
   
-Now that the Ollama configuration is done, we now have to start running all 3 containers (frontend, backend, searxng) with docker compose. This is simply done with the following commnad :
+Now that the Ollama configuration is done, we now have to start running all 3 containers (frontend, backend, searxng) with docker compose. This is simply done with the following command :
 ```bash
 sudo docker compose up -d
 ```
