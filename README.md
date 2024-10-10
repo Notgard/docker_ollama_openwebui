@@ -121,6 +121,9 @@ http://localhost:8889
 Perplexica is essentially an AI search engine powered by LLM, which uses it's own search index through searxng metadata. This enables it to answer user prompts in a typical chatbot manner while also getting it's information directly from the internet and cites its sources.  
   
 The installation is done again through docker but this time in a more roundabout way by using docker compose, which basically autimatically starts perplexica's backend, frontend and search index containers at the same time and connects them together. Additional configurations are usually needed for using Ollama, this is done through the following commands:  
+
+---
+
 First, you have to clone the Perplexity GitHub repository:
 ```bash
 git clone https://github.com/ItzCrazyKns/Perplexica.git
