@@ -142,3 +142,6 @@ Now that the Ollama configuration is done, we now have to start running all 3 co
 sudo docker compose up -d
 ```
 This will run all 3 interconnected services in the background, you can check that they are running properly with the **sudo docker ps** command.
+
+### Note:
+After testing, it seems that models below 7B parameters will strugle greatly with generating any kind of response while citing sources.
