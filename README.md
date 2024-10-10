@@ -116,3 +116,26 @@ PWD="$(pwd)" && PASSWORD="test" && sudo docker run --rm --gpus all -d -it -p 888
 This will run a Jupyterlab server that includes not only full GPU support with CUDA enabled, as well as some minimal AI libraries. The default password to use when prompted to access the Jupyterlab server here is simply "test", you can change this to whichever password by modifying the PASSWORD variable.  
 After running the command, head to the following URL in your browser to access Jupyterlab :  
 http://localhost:8889
+
+## Perplexica installation
+Perplexica is essentially an AI search engine powered by LLM, which uses it's own search index through searxng metadata. This enables it to answer user prompts in a typical chatbot manner while also getting it's information directly from the internet and cites its sources.  
+  
+The installation is done again through docker but this time in a more roundabout way by using docker compose, which basically autimatically starts perplexica's backend, frontend and search index containers at the same time and connects them together. Additional configurations are usually needed for using Ollama, this is done through the following commands:  
+First, you have to clone the Perplexity GitHub repository:
+```bash
+git clone https://github.com/ItzCrazyKns/Perplexica.git
+```
+Rename the configuration file:
+```bash
+mv sample.config.toml config.toml
+```
+Change the configuration in the config file to have the local Ollama URL:
+```bash
+sed -i 's|^OLLAMA = .*|OLLAMA = "http://host.docker.internal:11434"|' config.toml
+```
+  
+Now that the Ollama configuration is done, we now have to start running all 3 containers (frontend, backend, searxng) with docker compose. This is simply done with the following commnad :
+```bash
+sudo docker compose up -d
+```
+This will run all 3 interconnected services in the background, you can check that they are running properly with the **sudo docker ps** command.
