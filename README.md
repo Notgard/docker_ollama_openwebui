@@ -43,7 +43,7 @@ nvidia-smi
 
 ## Pull and run Ollama with GPU acceleration
 ```bash
-sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --restart always --name ollama ollama/ollama
 ```
 
 ### Check if container is running properly
