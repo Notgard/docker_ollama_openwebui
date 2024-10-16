@@ -57,10 +57,12 @@ If you encounter a problem with the Ollama Docker container and you find you nee
 If your Ollama container isn't restarting on PC startup, promptly remove the current Ollama container with the `sudo docker rm -f ollama` command. After this, you will have to run Ollama container again with the `sudo docker run` command above.
 
 ### Ollama not detecting GPU
-If this happens, run the nvidia-container-toolkit script again and reboot your machine.  
+If this happens, run the `nvidia-container-toolkit.sh` script again and reboot your machine.  
 This is likely due to how the container toolkit manages cgroups with Docker which are reloaded on machine restart.  
-If the previous instructions did not help, then we have to deal with cgroupfs which isn't working properly :  
+
 #### Manually solving cgroupfs problem
+If the previous instructions did not help, then we have to deal with cgroupfs which isn't working properly :  
+
 First off, we'll need to copy the docker configuration specific to the nvidia container toolkit with the following command : 
 ```bash
 # Note that you need to be placed at the root of this repository you cloned previously
