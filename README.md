@@ -51,6 +51,15 @@ sudo docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --restart a
 sudo docker ps
 ```
 
+### Note
+If you encounter a problem with the Ollama Docker container and you find you need to restart it, simply using the using the `sudo docker restart ollama` or `sudo docker start ollama` if it hadn't been started prior should do.
+
+If your Ollama container isn't restarting on PC startup, promptly remove the current Ollama container with the `sudo docker rm -f ollama` command. After this, you will have to run Ollama container again with the `sudo docker run` command above.
+
+### Ollama not detecting GPU
+If this happens, run the nvidia-container-toolkit script again and reboot your machine.  
+This is likely due to how the container toolkit manages cgroups with Docker which are reloaded on machine restart.
+
 ## Pull and run OpenWebUI with Nvidia GPU support
 ```bash
 sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
