@@ -26,8 +26,8 @@ sudo ubuntu-drivers install
 ./container_toolkit_install.sh
 ```
 
-# Need to reboot required to test proper driver installation (driver nvidia-550)
-## Warning ! The following command reboots your system, save any unsaved documents beforehand
+## Required to test proper driver installation (driver nvidia-550)
+### Warning ! The following command reboots your system, save any unsaved documents beforehand
 ```bash
 sudo reboot
 ```
