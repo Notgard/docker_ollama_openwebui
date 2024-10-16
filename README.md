@@ -64,8 +64,8 @@ This is likely due to how the container toolkit manages cgroups with Docker whic
 If the previous instructions did not help, then we have to deal with cgroupfs which isn't working properly :  
 
 First off, we'll need to copy the docker configuration specific to the nvidia container toolkit with the following command : 
+(Note that you need to be placed at the root of this repository you cloned previously)
 ```bash
-# Note that you need to be placed at the root of this repository you cloned previously
 sudo cp daemon.json /etc/docker/daemon.json
 ```
 Next, we have to restart the docker system on your machine (this will automatically restart your active containers) to take this change into account :
