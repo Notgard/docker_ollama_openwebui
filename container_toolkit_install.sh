@@ -9,4 +9,10 @@ sudo apt-get update
 #install toolkit
 sudo apt-get install -y nvidia-container-toolkit
 
+#additional configuration for nvidia toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+
+echo "Now restarting docker..."
+sudo systemctl restart docker
+
 echo "Finished nvidia container installation!"
