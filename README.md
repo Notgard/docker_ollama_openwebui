@@ -1,4 +1,9 @@
 # Docker + Ollama + OpenWebUI Installation instructions
+## Prerequisites
+Before continuing, you must install **git** which may or may not already be installed on your machine with the following command:  
+```bash
+sudo apt-get install git
+```
 ## Tools installations
 
 Clone this repository and go into it with the following command
