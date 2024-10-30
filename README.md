@@ -1,9 +1,4 @@
 # Docker + Ollama + OpenWebUI Installation instructions
-## Prerequisites
-Before continuing, you must install **git** which may or may not already be installed on your machine with the following command:  
-```bash
-sudo apt-get install git
-```
 ## Tools installations
 
 Clone this repository and go into it with the following command
@@ -68,7 +63,19 @@ This is likely due to how the container toolkit manages cgroups with Docker whic
 #### Manually solving cgroupfs problem
 If the previous instructions did not help, then we have to deal with cgroupfs which isn't working properly :  
 
-First off, we'll need to copy the docker configuration specific to the nvidia container toolkit with the following command : 
+Before doing anything, be sure that your packages and dependencies are up to date with the following commands :  
+```bash
+sudo apt-get update
+```
+and
+```bash
+sudo apt-get upgrade
+```
+Usually better to reboot afterwards in case and see if everything still works fine.
+
+---
+
+Now, we'll need to copy the docker configuration specific to the nvidia container toolkit with the following command : 
 (Note that you need to be placed at the root of this repository you cloned previously)
 ```bash
 sudo cp daemon.json /etc/docker/daemon.json
