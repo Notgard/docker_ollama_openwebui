@@ -58,7 +58,7 @@ If your Ollama container isn't restarting on PC startup, promptly remove the cur
 
 ### Ollama not detecting GPU
 If this happens, run the `nvidia-container-toolkit.sh` script again and reboot your machine.  
-This is likely due to how the container toolkit manages cgroups with Docker which are reloaded on machine restart.  
+This is likely due to how the container toolkit manages cgroups (ressource management kernel feature on linux) with Docker which are reloaded on machine restart or after the machine goes into sleep mode.  
 
 #### Manually solving cgroupfs problem
 If the previous instructions did not help, then we have to deal with cgroupfs which isn't working properly :  
@@ -86,6 +86,19 @@ sudo systemctl restart docker
 ```
 If you have run the latest nvidia-container-toolkit installation script as well as the commands in this section but the error still persists, contact support.
 
+#### Manually fixing Nvidia driver detection from docker
+Note that the previous solution might only solve the issue temporarily. If this is the case for you and the issue still persists, the problem is most likely due to Nvidia driver faults (f. ex. "Cuda error 999" in Ollama logs).  
+Often times, the root cause is driver kernel modules which aren't properly loaded or have been (for some reason) unloaded. The main culprit here is the "`nvidia-uvm`" (Unified Memory) module which is essential in the case of an LLM inference tool like Ollama which often offloads resources either on CPU or GPU.  
+To resolve this module, two solutions are available. To make sure the drivers are loaded properly we will do both.  
+**Load the module through `nvidia-modprobe` wrapper**
+```bash
+sudo nvidia-modprobe -u
+```
+  
+**Reload the module manually along with dependencies with `modprobe`**
+```bash
+sudo modprobe --remove nvidia-uvm && sudo modprobe nvidia-uvm
+```
 ## Pull and run OpenWebUI with Nvidia GPU support
 ```bash
 sudo docker run -d -p 3030:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
